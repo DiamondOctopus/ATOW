@@ -34,7 +34,7 @@ class CharacterActorDataModel extends ActorDataModel {
                 eyeColor: new StringField({required: true, blank:true}),
                 hairColor: new StringField({required: true, blank:true})
             }),
-            money: new NumberField
+            money: new NumberField({required: true, blank:true})
         };
     }
 }
