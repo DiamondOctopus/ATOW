@@ -16,13 +16,13 @@
   "documentTypes": {
     "Actor": {
       "character": {
-        "htmlFields": ["biography"]
+        "htmlFields": ["background.biography"]
       },
       "enemy": {
-        "htmlFields": ["biography"]
+        "htmlFields": ["background.biography"]
       },
       "npc": {
-        "htmlFields": ["biography"]
+        "htmlFields": ["background.biography"]
       }
     },
     "Item": {
