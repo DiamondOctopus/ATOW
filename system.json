@@ -1,0 +1,32 @@
+{
+  "id": "atow-unofficial",
+  "title": "A Time of War: The BATTLETECH RPG",
+  "description": "A human-readable description of your system.",
+  "version": "0.1",
+  "authors": [{
+    "name": "Riven Dragon"
+  }]
+  "esmodules": ["placeholder.mjs"], //placeholder array for javascript files
+  "styles": ["styles/system-styles.css"], //placeholder for css
+  "packs": [{
+    //placeholder for packs
+  }],
+ "languages": [{
+   "lang": "en",
+   "name": "English",
+   "path": "lang/en.json"
+  }],
+  "documentTypes": {
+    "Actor": {
+      "character": {
+        "htmlFields": ["biography"] //remember to add biography page that does anything with this
+      },
+      "enemy": {
+        "htmlFields": ["biography"]
+      },
+      "npc": {
+        "htmlFields": ["biography"]
+      }
+    }
+  }
+}
