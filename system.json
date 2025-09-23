@@ -5,12 +5,9 @@
   "version": "0.1",
   "authors": [{
     "name": "Riven Dragon"
-  }]
-  "esmodules": ["placeholder.mjs"], //placeholder array for javascript files
-  "styles": ["styles/system-styles.css"], //placeholder for css
-  "packs": [{
-    //placeholder for packs
   }],
+  "esmodules": ["atow-unofficial.mjs"],
+  "styles": ["styles/system-styles.css"],
  "languages": [{
    "lang": "en",
    "name": "English",
@@ -19,13 +16,60 @@
   "documentTypes": {
     "Actor": {
       "character": {
-        "htmlFields": ["biography"] //remember to add biography page that does anything with this
+        "htmlFields": ["biography"]
       },
       "enemy": {
         "htmlFields": ["biography"]
       },
       "npc": {
         "htmlFields": ["biography"]
+      }
+    },
+    "Item": {
+      "weapon": {},
+      "equipment": {},
+      "prosthetics": {},
+      "consumable": {},
+      "container": {},
+      "general-life-modules": {},
+      "higher-education": {}
+    }
+  },
+  "packs": [
+    {
+      "name": "equipment",
+      "label": "The Warrior's Catalog",
+      "system": "atow-unofficial",
+      "path": "packs/equipment",
+      "type": "Item",
+      "private": false,
+      "flags": {
+        "atow-unofficial": {
+          "types": ["weapon", "equipment", "consumable", "container", "prosthetics"]
+        }
+      }
+    },
+    {
+      "name": "life-modules",
+      "label": "Life Modules",
+      "system": "atow-unofficial",
+      "path": "packs/life-modules",
+      "type": "Item",
+      "private": false,
+      "flags": {
+        "atow-unofficial": {
+          "types": ["general-life-modules","higher-education"]
+        }
+      }
+    }
+  ],
+  "primaryTokenAttribute": "attribute.hp",
+  "secondaryTokenAttribute": "attribute.fat",
+  "flags": {
+    "atow-unofficial": {
+      "sourceBooks": {
+        "atow": "A Time of War",
+        "atow-companion": "A Time of War Companion"
       }
     }
   }
