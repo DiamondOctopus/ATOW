@@ -220,6 +220,3 @@ export class ATOWActor extends Actor {
 export class ATOWItem extends Item {
     //do whatever you want man fuck it
 }
-
-console.log(actor.system.resources.health.value);
-console.log(actor.system.resources.fatigue.value);
