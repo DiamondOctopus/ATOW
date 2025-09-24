@@ -8,8 +8,8 @@ import {ATOWItemSheet} from "./sheets/item-sheet.mjs";
 Hooks.once("init", () => {
 
 
-    CONFIG.ActorV2.documentClass = ATOWActor;
-    CONFIG.ItemV2.documentClass = ATOWItem;
+    CONFIG.Actor.documentClass = ATOWActor;
+    CONFIG.Item.documentClass = ATOWItem;
 
     //sheets
     Actors.unregisterSheet('core', ActorSheetV2);
