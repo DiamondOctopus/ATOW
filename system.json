@@ -16,23 +16,24 @@
   "documentTypes": {
     "Actor": {
       "character": {
-        "htmlFields": ["background.biography"]
+        "htmlFields": ["biography"]
       },
       "enemy": {
-        "htmlFields": ["background.biography"]
+        "htmlFields": ["biography"]
       },
       "npc": {
-        "htmlFields": ["background.biography"]
+        "htmlFields": ["biography"]
       }
     },
     "Item": {
       "weapon": {},
+      "armor": {},
       "equipment": {},
-      "prosthetics": {},
+      "prosthetic": {},
       "consumable": {},
-      "container": {},
-      "general-life-modules": {},
-      "higher-education": {}
+      "carrygear": {},
+      "lifemodules": {},
+      "highereducation": {}
     }
   },
   "packs": [
@@ -45,7 +46,7 @@
       "private": false,
       "flags": {
         "atow-unofficial": {
-          "types": ["weapon", "equipment", "consumable", "container", "prosthetics"]
+          "types": ["weapon", "equipment", "consumable", "carrygear", "prosthetics"]
         }
       }
     },
@@ -58,13 +59,13 @@
       "private": false,
       "flags": {
         "atow-unofficial": {
-          "types": ["general-life-modules","higher-education"]
+          "types": ["lifemodules","highereducation"]
         }
       }
     }
   ],
-  "primaryTokenAttribute": "attribute.hp",
-  "secondaryTokenAttribute": "attribute.fat",
+  "primaryTokenAttribute": "resources.health",
+  "secondaryTokenAttribute": "resources.fatigue",
   "flags": {
     "atow-unofficial": {
       "sourceBooks": {

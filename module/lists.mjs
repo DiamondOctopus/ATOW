@@ -92,6 +92,11 @@ export const Skills = [
     "Tracking/Urban",
     "Tracking/Wilds",
     "Training",
-    "Zero-G Operations"];
+    "Zero-G Operations"
+];
 
 export const AffCodes = ["CC", "CS", "DC", "FS", "FW", "LA", "FR", "IC", "HC", "Clan", "CF", "MC", "MH", "OA", "TC", "MP", "DP", "IN", "TR", "Per"];
+
+export const APTypes = ["Ballistic", "Energy", "Melee", "Special", "Explosive"];
+
+export const DamageTypes = ["Area-Effect", "Burst-Fire", "Continuous", "Subduing", "Splash"];

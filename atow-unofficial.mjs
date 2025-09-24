@@ -1,100 +1,56 @@
-import {Skills, AffCodes} from "./module/lists.js";
-// data model
-const { HTMLField, NumberField, SchemaField, StringField, BooleanField } = foundry.data.fields;
+import {
+    ATOWActor, ATOWItem, CharacterData, ActorData, WeaponData, ArmorData, CarryGearData, EquipData, ProstheticData, ConsumableData, LifeModules, HEModules
+} from "./module/data-models.mjs";
 
-class ActorDataModel extends foundry.abstract.TypeDataModel {
-    static defineSchema() {
-        return {
-            resources: new SchemaField({
-                health: new SchemaField({
-                    min: new NumberField({required: true, integer: true, min: 0, initial: 0}),
-                    value: new NumberField({required: true, integer: true, min: 0, initial: 10}),
-                    max: new NumberField({required: true, integer: true, min: 0, initial: 10})
-                }),
-                fatigue: new SchemaField({
-                    min: new NumberField({required: true, integer: true, min: 0, initial: 0}),
-                    value: new NumberField({required: true, integer: true, min: 0, initial: 0}),
-                    max: new NumberField({required: true, integer: true, min: 0, initial: 0})
-                })
-            })
-        };
-    }
-}
+import {ATOWActorSheet} from "./sheets/actor-sheet.mjs";
+import {ATOWItemSheet} from "./sheets/item-sheet.mjs";
 
-class CharacterActorDataModel extends ActorDataModel {
-    static defineSchema() {
-        return {
-            ...super.defineSchema(),
-            experienceTotal: new NumberField({required: true, integer: true}),
-            experienceSpendable: new NumberField({required: true, integer: true}),
-            background: new SchemaField({
-                biography: new HTMLField({required: true, blank:true}),
-                height: new StringField({required: true, blank:true}),
-                weight: new StringField({required: true, blank:true}),
-                eyeColor: new StringField({required: true, blank:true}),
-                hairColor: new StringField({required: true, blank:true})
-            }),
-            money: new NumberField({required: true, blank:true})
-        };
-    }
-}
+Hooks.once("init", () => {
 
-class ItemDataModel extends foundry.abstract.TypeDataModel {
-    static defineSchema() {
-        return {
-          cost: new NumberField({required: true, integer: true, min: 0, initial: 0}),
-            aff: new StringField({
-                required: true,
-                blank:false,
-                options: [...AffCodes, "none"],
-                initial: "none"
-          }),
-            mass: new NumberField({required: true, min: 0, initial: 0}),
-            usesPower: new BooleanField({required: true, initial: false}),
-            powerCap: new NumberField({required: true, integer: true, min: 0, initial: 0}),
-            powerDraw: new NumberField({required: true, integer: true, min: 0, initial: 0}),
-            useSkill: new StringField({
-                required: true,
-                blank:false,
-                options: [...Skills, "none"],
-                initial: "none"
-            })
-        };
-    }
-}
 
-export class WeaponDataModel extends ItemDataModel {
-    static defineSchema() {
-        return {
-            ...super.defineSchema(),
-            damage: new NumberField({required: true, integer: true, min: 0, initial: 1}),
-            penetration: new NumberField({required: true, integer: true, min: 0, initial: 0}),
-            shots: new NumberField({required: true, integer: true, min: 0, initial: 0}),
-            APCode: new StringField({
-                required: true,
-                blank: true
-            }),
-            BDCode: new StringField({
-                required: true,
-                blank: true
-            }),
-            burst: new BooleanField({required: true, initial: false}),
-            burstShots: new NumberField({required: true, integer: true, min: 0, initial: 0}),
-            massReload: new NumberField({required: true, min: 0, initial: 0}),
-            costReload: new NumberField({required: true, integer: true, min: 0, initial: 0})
-        };
-    }
-}
+    CONFIG.Actor.documentClass = ATOWActor;
+    CONFIG.Item.documentClass = ATOWItem;
 
-export class ArmorDataModel extends ItemDataModel {
-    static defineSchema() {
-        return {
-            ...super.defineSchema(),
-            mDef: new NumberField({required: true, integer: true, min: 0, initial: 0}),
-            bDef: new NumberField({required: true, integer: true, min: 0, initial: 0}),
-            eDef: new NumberField({required: true, integer: true, min: 0, initial: 0}),
-            xDef: new NumberField({required: true, integer: true, min: 0, initial: 0}),
-            costPatch: new NumberField({required: true, integer: true, min: 0, initial: 0})
-        }
+    //sheets
+    Actors.unregisterSheet('core', ActorSheet);
+    Actors.registerSheet('atow-unofficial', ATOWActorSheet,{
+        makeDefault: true,
+        label: 'ATOW Actor Sheet',
+    });
+    Items.unregisterSheet('core', ItemSheet);
+    Items.unregisterSheet('atow-unofficial', ATOWItemSheet,{
+        makeDefault: true,
+        label: 'ATOW Item Sheet',
+    });
+
+    //config actors
+    CONFIG.Actor.dataModels = {
+        player: CharacterData,
+        npc: ActorData,
+        enemy: ActorData
+    };
+
+    //config items
+    CONFIG.Item.dataModels = {
+        weapon: WeaponData,
+        armor: ArmorData,
+        equipment: EquipData,
+        prosthetic: ProstheticData,
+        consumable: ConsumableData,
+        carrygear: CarryGearData,
+        lifemodules: LifeModules,
+        highereducation:  HEModules
+    };
+
+    //config trackables
+    CONFIG.Actor.trackableAttributes = {
+      player: {
+          bar: ["resources.health", "resources.fatigue"]
+      }
+    };
+
+    //config initiative
+    CONFIG.Combat.initiative = {
+        formula: '2d6'
     }
-}
+});
