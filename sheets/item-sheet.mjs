@@ -1,4 +1,7 @@
-export class ATOWItemSheet extends HandlebarsApplicationMixin(foundry.applications.sheets.ItemSheetV2) {
+const { HandlebarsApplicationMixin } = foundry.applications.api
+const { ItemSheetV2 } = foundry.applications.sheets.ItemSheetV2
+
+export class ATOWItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
     // ActorSheetV2 automatically provides:
     // - DragDrop setup with '.draggable' selector in _onRender()
     // - Permission checks via _canDragStart/_canDragDrop (checks isEditable)
@@ -8,8 +11,8 @@ export class ATOWItemSheet extends HandlebarsApplicationMixin(foundry.applicatio
     // - Document drop handling with delegation to _onDropItem, _onDropActiveEffect, etc.
     static DEFAULT_OPTIONS = {
         position: {
-          width: 600,
-          height: 600
+            width: 600,
+            height: 600
         },
         window: {
             resizeable: true,
