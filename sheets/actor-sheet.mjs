@@ -1,7 +1,7 @@
 const { ActorSheetV2 } = foundry.applications.sheets
 
 
-class ATOWActorSheet extends HandlebarsApplicationMixin(ActorSheetV2) {
+export class ATOWActorSheet extends HandlebarsApplicationMixin(ActorSheetV2) {
     // ActorSheetV2 automatically provides:
     // - DragDrop setup with '.draggable' selector in _onRender()
     // - Permission checks via _canDragStart/_canDragDrop (checks isEditable)
