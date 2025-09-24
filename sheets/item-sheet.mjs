@@ -1,5 +1,5 @@
 const { HandlebarsApplicationMixin } = foundry.applications.api
-const { ItemSheetV2 } = foundry.applications.sheets.ItemSheetV2
+const { ItemSheetV2 } = foundry.applications.sheets
 
 export class ATOWItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
     // ActorSheetV2 automatically provides:
