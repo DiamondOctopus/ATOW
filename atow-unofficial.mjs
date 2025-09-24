@@ -12,13 +12,13 @@ Hooks.once("init", () => {
     CONFIG.Item.documentClass = ATOWItem;
 
     //sheets
-    Actors.unregisterSheet('core', ActorSheetV2);
-    Actors.registerSheet('atow-unofficial', ATOWActorSheet,{
+    foundry.documents.collections.Actors.unregisterSheet('core', ActorSheet);
+    foundry.documents.collections.Actors.registerSheet('atow-unofficial', ATOWActorSheet,{
         makeDefault: true,
         label: 'ATOW Actor Sheet',
     });
-    Items.unregisterSheet('core', ItemSheetV2);
-    Items.unregisterSheet('atow-unofficial', ATOWItemSheet,{
+    foundry.documents.collections.Items.unregisterSheet('core', ItemSheet);
+    foundry.documents.collections.Items.unregisterSheet('atow-unofficial', ATOWItemSheet,{
         makeDefault: true,
         label: 'ATOW Item Sheet',
     });
