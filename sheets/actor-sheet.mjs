@@ -1,4 +1,4 @@
-export class ATOWActorSheet extends HandlebarsApplicationMixin(foundry.applications.sheets.ActorSheetV2) {
+export class ATOWActorSheet extends HandlebarsApplicationMixin(foundry.applications.sheets) {
     // ActorSheetV2 automatically provides:
     // - DragDrop setup with '.draggable' selector in _onRender()
     // - Permission checks via _canDragStart/_canDragDrop (checks isEditable)
@@ -14,6 +14,12 @@ export class ATOWActorSheet extends HandlebarsApplicationMixin(foundry.applicati
         window: {
             resizeable: true,
             title: 'Character Sheet'
+        },
+    }
+
+    static PARTS = {
+        form: {
+            template: 'systems/atow-unofficial/templates/actor-sheet.html'
         }
     }
 }

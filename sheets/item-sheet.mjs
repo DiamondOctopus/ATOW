@@ -14,6 +14,12 @@ export class ATOWItemSheet extends HandlebarsApplicationMixin(foundry.applicatio
         window: {
             resizeable: true,
             title: 'Item Sheet'
+        },
+
+    }
+    static PARTS = {
+        form: {
+            template: 'systems/atow-unofficial/templates/actor-sheet.html'
         }
     }
 }
