@@ -1,7 +1,4 @@
-const { ItemSheetV2 } = foundry.applications.sheets.ItemSheetV2
-
-
-export class ATOWItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
+export class ATOWItemSheet extends HandlebarsApplicationMixin(foundry.applications.sheets.ItemSheetV2) {
     // ActorSheetV2 automatically provides:
     // - DragDrop setup with '.draggable' selector in _onRender()
     // - Permission checks via _canDragStart/_canDragDrop (checks isEditable)
