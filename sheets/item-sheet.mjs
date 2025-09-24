@@ -1,8 +1,12 @@
-export class ATOWItemSheet extends foundry.applications.sheets.ItemSheetV2 {
-    static get defaultOptions() {
-        return foundry.utils.mergeObject(super.defaultOptions, {
+const { ItemSheetV2 } = foundry.applications.sheets
 
-        });
 
-    }
+class ATOWItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
+    // ActorSheetV2 automatically provides:
+    // - DragDrop setup with '.draggable' selector in _onRender()
+    // - Permission checks via _canDragStart/_canDragDrop (checks isEditable)
+    // - Basic item dragging for elements with data-item-id
+    // - Active effect dragging for elements with data-effect-id
+    // - Item sorting within the same actor via _onSortItem
+    // - Document drop handling with delegation to _onDropItem, _onDropActiveEffect, etc.
 }
