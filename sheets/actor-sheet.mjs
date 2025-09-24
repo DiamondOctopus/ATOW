@@ -6,5 +6,14 @@ export class ATOWActorSheet extends HandlebarsApplicationMixin(foundry.applicati
     // - Active effect dragging for elements with data-effect-id
     // - Item sorting within the same actor via _onSortItem
     // - Document drop handling with delegation to _onDropItem, _onDropActiveEffect, etc.
-    return;
+    static DEFAULT_OPTIONS = {
+        position: {
+            width: 600,
+            height: 600
+        },
+        window: {
+            resizeable: true,
+            title: 'Character Sheet'
+        }
+    }
 }
