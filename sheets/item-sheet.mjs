@@ -1,4 +1,4 @@
-const { ItemSheetV2 } = foundry.applications.sheets.ItemSheetV2
+const { ItemSheetV2 } = foundry.applications.sheets
 
 
 export class ATOWItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
