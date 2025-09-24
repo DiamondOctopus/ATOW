@@ -8,16 +8,16 @@ import {ATOWItemSheet} from "./sheets/item-sheet.mjs";
 Hooks.once("init", () => {
 
 
-    CONFIG.Actor.documentClass = ATOWActor;
-    CONFIG.Item.documentClass = ATOWItem;
+    CONFIG.ActorV2.documentClass = ATOWActor;
+    CONFIG.ItemV2.documentClass = ATOWItem;
 
     //sheets
-    Actors.unregisterSheet('core', ActorSheet);
+    Actors.unregisterSheet('core', ActorSheetV2);
     Actors.registerSheet('atow-unofficial', ATOWActorSheet,{
         makeDefault: true,
         label: 'ATOW Actor Sheet',
     });
-    Items.unregisterSheet('core', ItemSheet);
+    Items.unregisterSheet('core', ItemSheetV2);
     Items.unregisterSheet('atow-unofficial', ATOWItemSheet,{
         makeDefault: true,
         label: 'ATOW Item Sheet',

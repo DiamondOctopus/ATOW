@@ -5,7 +5,7 @@ import {toCamelCase} from "./helpers.mjs";
 // data model shit
 
 const {
-    HTMLField, SchemaField, NumberField, StringField, FilePathField, ArrayField
+    HTMLField, SchemaField, NumberField, StringField, FilePathField, ArrayField, BooleanField
 } = foundry.data.fields;
 
 /**
