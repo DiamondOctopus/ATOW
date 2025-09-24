@@ -25,12 +25,15 @@ export class ActorData extends foundry.abstract.TypeDataModel {
                 }),
                 fatigue: new SchemaField({
                     min: new NumberField({required: true, integer: true, min: 0, initial: 0}),
-                    value: new NumberField({required: true, integer: true, min: 0, initial: 0}),
-                    max: new NumberField({required: true, integer: true, min: 0, initial: 0})
+                    value: new NumberField({required: true, integer: true, min: 0, initial: 10}),
+                    max: new NumberField({required: true, integer: true, min: 0, initial: 10})
                 }),
                 biography: new HTMLField({required: true, blank:true}),
             })
         };
+    }
+    prepareDerivedData() {
+        super.prepareDerivedData();
     }
 }
 
@@ -50,6 +53,9 @@ export class CharacterData extends ActorData {
             money: new NumberField({required: true, blank:true})
         };
     }
+    prepareDerivedData() {
+        super.prepareDerivedData();
+    }
 }
 
 /**
@@ -61,6 +67,9 @@ export class CharacterData extends ActorData {
 class BaseItemData extends foundry.abstract.TypeDataModel {
     static defineSchema() {
 
+    }
+    prepareDerivedData() {
+        super.prepareDerivedData();
     }
 }
 
@@ -207,14 +216,14 @@ export class ATOWActor extends Actor {
             content: `${this.name} took ${damage} damage`
         });
     }
-    prepareDerivedData() {
-        super.prepareDerivedData();
-
-        const { health } = this.system.resources;
-        health.value = Math.clamp(health.value, health.min, health.max);
-        const { fatigue } = this.system.resources.fatigue;
-        fatigue.value = Math.clamp(fatigue.value, fatigue.min, fatigue.max);
-    }
+//    prepareDerivedData() {
+//        super.prepareDerivedData();
+//
+//        const { health } = this.system.resources;
+//        health.value = Math.clamp(health.value, health.min, health.max);
+//        const { fatigue } = this.system.resources;
+//        fatigue.value = Math.clamp(fatigue.value, fatigue.min, fatigue.max);
+//    }
 }
 
 export class ATOWItem extends Item {

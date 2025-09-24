@@ -20,9 +20,30 @@ export class ATOWActorSheet extends HandlebarsApplicationMixin(ActorSheetV2) {
         },
     }
 
+    static TABS = {
+        initial: "main",
+        tabs: [
+            {
+                id: "main",
+                label: "Main"
+            },
+            {
+                id: "inventory",
+                label: "Inventory"
+            }
+        ]
+
+    }
+
     static PARTS = {
         form: {
             template: 'systems/atow-unofficial/templates/actor-sheet.html'
         }
     }
+//    async _prepareContext() {
+//        const context = await super.perpareContext()
+//        context.system = this.actor.system
+//        context.flags = this.actor.flags
+//        return context
+//    }
 }

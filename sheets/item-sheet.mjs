@@ -1,6 +1,8 @@
 const { HandlebarsApplicationMixin } = foundry.applications.api
 const { ItemSheetV2 } = foundry.applications.sheets
 
+//is this actually doing what i want?
+
 export class ATOWItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
     // ActorSheetV2 automatically provides:
     // - DragDrop setup with '.draggable' selector in _onRender()
