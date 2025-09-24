@@ -1,4 +1,4 @@
-const { ActorSheetV2 } = foundry.applications.sheets
+const { ActorSheetV2 } = foundry.applications.sheets.ActorSheetV2
 
 
 export class ATOWActorSheet extends HandlebarsApplicationMixin(ActorSheetV2) {
