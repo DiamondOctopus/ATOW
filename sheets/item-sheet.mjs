@@ -24,7 +24,7 @@ export class ATOWItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
     }
     static PARTS = {
         form: {
-            template: 'systems/atow-unofficial/templates/actor-sheet.html'
+            template: 'systems/atow-unofficial/templates/item-sheet.hbs'
         }
     }
 }

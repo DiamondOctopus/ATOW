@@ -37,7 +37,7 @@ export class ATOWActorSheet extends HandlebarsApplicationMixin(ActorSheetV2) {
 
     static PARTS = {
         form: {
-            template: 'systems/atow-unofficial/templates/actor-sheet.html'
+            template: 'systems/atow-unofficial/templates/actor-sheet.hbs'
         }
     }
 //    async _prepareContext() {

@@ -7,7 +7,7 @@
     "name": "Riven Dragon"
   }],
   "esmodules": ["atow-unofficial.mjs"],
-  "styles": ["styles/system-styles.css"],
+  "styles": ["styles/atow-unofficial.css"],
  "languages": [{
    "lang": "en",
    "name": "English",
