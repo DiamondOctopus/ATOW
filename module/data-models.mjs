@@ -216,14 +216,14 @@ export class ATOWActor extends Actor {
             content: `${this.name} took ${damage} damage`
         });
     }
-//    prepareDerivedData() {
-//        super.prepareDerivedData();
-//
-//        const { health } = this.system.resources;
-//        health.value = Math.clamp(health.value, health.min, health.max);
-//        const { fatigue } = this.system.resources;
-//        fatigue.value = Math.clamp(fatigue.value, fatigue.min, fatigue.max);
-//    }
+    prepareDerivedData() {
+        super.prepareDerivedData();
+
+        const { health } = this.system.resources;
+        health.value = Math.clamp(health.value, health.min, health.max);
+        const { fatigue } = this.system.resources;
+        fatigue.value = Math.clamp(fatigue.value, fatigue.min, fatigue.max);
+    }
 }
 
 export class ATOWItem extends Item {

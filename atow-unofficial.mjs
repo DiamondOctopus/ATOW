@@ -25,7 +25,7 @@ Hooks.once("init", () => {
 
     //config actors
     CONFIG.Actor.dataModels = {
-        player: CharacterData,
+        character: CharacterData,
         npc: ActorData,
         enemy: ActorData
     };
@@ -44,7 +44,7 @@ Hooks.once("init", () => {
 
     //config trackables
     CONFIG.Actor.trackableAttributes = {
-      player: {
+      character: {
           bar: ["resources.health", "resources.fatigue"]
       }
     };
