@@ -23,7 +23,7 @@ Hooks.once("init", () => {
         label: 'ATOW Item Sheet',
     });
 
-    //config actors
+    //config actors MAKE SURE THESE MATCH THE SYSTEM.JSON
     CONFIG.Actor.dataModels = {
         character: CharacterData,
         npc: ActorData,
