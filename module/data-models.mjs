@@ -8,6 +8,8 @@ const {
     HTMLField, SchemaField, NumberField, StringField, FilePathField, ArrayField, BooleanField
 } = foundry.data.fields;
 
+const requiredInteger = {required: true, integer:true, nullable: false};
+
 /**
  *
  *                              Actor Data
@@ -19,14 +21,14 @@ export class ActorData extends foundry.abstract.TypeDataModel {
         return {
             resources: new SchemaField({
                 health: new SchemaField({
-                    min: new NumberField({required: true, integer: true, min: 0, initial: 0}),
-                    value: new NumberField({required: true, integer: true, min: 0, initial: 10}),
-                    max: new NumberField({required: true, integer: true, min: 0, initial: 10})
+                    min: new NumberField({...requiredInteger, min: 0, initial: 0}),
+                    value: new NumberField({...requiredInteger, min: 0, initial: 10}),
+                    max: new NumberField({...requiredInteger, min: 0, initial: 10})
                 }),
                 fatigue: new SchemaField({
-                    min: new NumberField({required: true, integer: true, min: 0, initial: 0}),
-                    value: new NumberField({required: true, integer: true, min: 0, initial: 10}),
-                    max: new NumberField({required: true, integer: true, min: 0, initial: 10})
+                    min: new NumberField({...requiredInteger, min: 0, initial: 0}),
+                    value: new NumberField({...requiredInteger, min: 0, initial: 10}),
+                    max: new NumberField({...requiredInteger, min: 0, initial: 10})
                 }),
                 biography: new HTMLField({required: true, blank:true}),
             })
@@ -42,8 +44,8 @@ export class CharacterData extends ActorData {
     static defineSchema() {
         return {
             ...super.defineSchema(),
-            experienceTotal: new NumberField({required: true, integer: true}),
-            experienceSpendable: new NumberField({required: true, integer: true}),
+            experienceTotal: new NumberField({...requiredInteger, initial: 0}),
+            experienceSpendable: new NumberField({...requiredInteger, initial: 0}),
             background: new SchemaField({
                 height: new StringField({required: true, blank:true}),
                 weight: new StringField({required: true, blank:true}),
@@ -99,7 +101,7 @@ export class EquipData extends BaseItemData {
     static defineSchema() {
         return {
             ...super.defineSchema(),
-            cost: new NumberField({required: true, integer: true, min: 0, initial: 0}),
+            cost: new NumberField({...requiredInteger, min: 0, initial: 0}),
             aff: new StringField({
                 required: true,
                 blank:false,
@@ -108,8 +110,8 @@ export class EquipData extends BaseItemData {
             }),
             mass: new NumberField({required: true, min: 0, initial: 0}),
             usesPower: new BooleanField({required: true, initial: false}), //wow if only js had multiple inheritance
-            powerCap: new NumberField({required: true, integer: true, min: 0, initial: 0}),
-            powerDraw: new NumberField({required: true, integer: true, min: 0, initial: 0}),
+            powerCap: new NumberField({...requiredInteger, min: 0, initial: 0}),
+            powerDraw: new NumberField({...requiredInteger, min: 0, initial: 0}),
             useSkill: new StringField({
                 required: true,
                 blank:false,
@@ -125,9 +127,9 @@ export class ConsumableData extends EquipData {
         return {
             ...super.defineSchema(),
             charges: new SchemaField({
-                min: new NumberField({required: true, integer: true, min: 0, initial: 0}),
-                value: new NumberField({required: true, integer: true, min: 0, initial: 0}),
-                max: new NumberField({required: true, integer: true, min: 0, initial: 0})
+                min: new NumberField({...requiredInteger, min: 0, initial: 0}),
+                value: new NumberField({...requiredInteger, min: 0, initial: 0}),
+                max: new NumberField({...requiredInteger, min: 0, initial: 0})
             })
         }
     }
@@ -137,9 +139,9 @@ export class WeaponData extends EquipData {
     static defineSchema() {
         return {
             ...super.defineSchema(),
-            damage: new NumberField({required: true, integer: true, min: 0, initial: 1}),
-            penetration: new NumberField({required: true, integer: true, min: 0, initial: 0}),
-            shots: new NumberField({required: true, integer: true, min: 0, initial: 0}),
+            damage: new NumberField({...requiredInteger, min: 0, initial: 1}),
+            penetration: new NumberField({...requiredInteger, min: 0, initial: 0}),
+            shots: new NumberField({...requiredInteger, min: 0, initial: 0}),
             // ap codes
             bDam: new BooleanField({required: true, initial: false}),
             eDam: new BooleanField({required: true, initial: false}),
@@ -154,11 +156,11 @@ export class WeaponData extends EquipData {
             subduing: new BooleanField({required: true, initial: false}),
             splash: new BooleanField({required: true, initial: false}),
             // end damage codes
-            burstShots: new NumberField({required: true, integer: true, min: 0, initial: 0}), //wow if only js had multiple inheritance
+            burstShots: new NumberField({...requiredInteger, min: 0, initial: 0}), //wow if only js had multiple inheritance
             massReload: new NumberField({required: true, min: 0, initial: 0}),
-            costReload: new NumberField({required: true, integer: true, min: 0, initial: 0}),
+            costReload: new NumberField({...requiredInteger, min: 0, initial: 0}),
             isSubduing: new BooleanField({required: true, initial: false}),
-            recoil: new NumberField({required: true, integer: true, min: 0, initial: 0}),
+            recoil: new NumberField({...requiredInteger, min: 0, initial: 0}),
         };
     }
 }
@@ -167,11 +169,11 @@ export class ArmorData extends EquipData {
     static defineSchema() {
         return {
             ...super.defineSchema(),
-            mDef: new NumberField({required: true, integer: true, min: 0, initial: 0}),
-            bDef: new NumberField({required: true, integer: true, min: 0, initial: 0}),
-            eDef: new NumberField({required: true, integer: true, min: 0, initial: 0}),
-            xDef: new NumberField({required: true, integer: true, min: 0, initial: 0}),
-            costPatch: new NumberField({required: true, integer: true, min: 0, initial: 0})
+            mDef: new NumberField({...requiredInteger, min: 0, initial: 0}),
+            bDef: new NumberField({...requiredInteger, min: 0, initial: 0}),
+            eDef: new NumberField({...requiredInteger, min: 0, initial: 0}),
+            xDef: new NumberField({...requiredInteger, min: 0, initial: 0}),
+            costPatch: new NumberField({...requiredInteger, min: 0, initial: 0})
         }
     }
 }
