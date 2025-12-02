@@ -1,10 +1,11 @@
 import {
-    ATOWActor, ATOWItem, ActorData, WeaponData, ArmorData, CarryGearData, EquipData, ProstheticData, ConsumableData, LifeModules, HEModules
-} from "./module/models/data-models.mjs";
+    ATOWActor, ATOWItem
+} from "./module/models/base-models.mjs";
 
 import {ATOWActorSheet} from "./sheets/actor-sheet.mjs";
 import {ATOWItemSheet} from "./sheets/item-sheet.mjs";
-import {CharacterData} from "./module/models/character-model.mjs";
+import {ActorData, CharacterData} from "./module/models/actor-model.mjs";
+import {ArmorData, CarryGearData, ConsumableData, EquipData, HEModules, LifeModules, ProstheticData, WeaponData} from "./module/models/item-models.mjs";
 
 Hooks.once("init", () => {
 

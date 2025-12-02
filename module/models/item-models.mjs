@@ -1,7 +1,3 @@
-import {AffCodes, Skills} from "../lists.mjs";
-
-// data model shit
-
 const {
     HTMLField, SchemaField, NumberField, StringField, FilePathField, ArrayField, BooleanField
 } = foundry.data.fields;
@@ -10,44 +6,16 @@ const requiredInteger = {required: true, integer:true, nullable: false};
 
 /**
  *
- *                              Actor Data
- *
- **/
-
-export class ActorData extends foundry.abstract.TypeDataModel {
-    static defineSchema() {
-        return {
-            resources: new SchemaField({
-                health: new SchemaField({
-                    min: new NumberField({...requiredInteger, min: 0, initial: 0}),
-                    value: new NumberField({...requiredInteger, min: 0, initial: 10}),
-                    max: new NumberField({...requiredInteger, min: 0, initial: 10})
-                }),
-                fatigue: new SchemaField({
-                    min: new NumberField({...requiredInteger, min: 0, initial: 0}),
-                    value: new NumberField({...requiredInteger, min: 0, initial: 10}),
-                    max: new NumberField({...requiredInteger, min: 0, initial: 10})
-                }),
-                biography: new HTMLField({required: true, blank:true}),
-            })
-        };
-    }
-    prepareDerivedData() {
-        super.prepareDerivedData();
-    }
-}
-
-
-/**
- *
  *                              Item Data
  *
-**/
+ **/
+import {AffCodes, Skills} from "../lists.mjs";
 
 class BaseItemData extends foundry.abstract.TypeDataModel {
     static defineSchema() {
 
     }
+
     prepareDerivedData() {
         super.prepareDerivedData();
     }
@@ -57,8 +25,12 @@ export class LifeModules extends BaseItemData {
     static defineSchema() {
         return {
             ...super.defineSchema(),
-            //todo add life module things
+            //todo add life modules
         }
+    }
+
+    prepareDerivedData() {
+        super.prepareDerivedData();
     }
 }
 
@@ -66,14 +38,19 @@ export class HEModules extends LifeModules {
     static defineSchema() {
         return {
             ...super.defineSchema(),
-            //todo add higher education modules
+            //todo add higher education modules + rebates
         }
+    }
+
+    prepareDerivedData() {
+        super.prepareDerivedData();
+        //todo HE rebates calcs
     }
 }
 
 /**
-*                           Equipment
-**/
+ *                           Equipment
+ **/
 
 export class EquipData extends BaseItemData {
     static defineSchema() {
@@ -82,21 +59,26 @@ export class EquipData extends BaseItemData {
             cost: new NumberField({...requiredInteger, min: 0, initial: 0}),
             aff: new StringField({
                 required: true,
-                blank:false,
+                blank: false,
                 options: [...AffCodes, "none"],
                 initial: "none"
             }),
             mass: new NumberField({required: true, min: 0, initial: 0}),
             usesPower: new BooleanField({required: true, initial: false}), //wow if only js had multiple inheritance
-            powerCap: new NumberField({...requiredInteger, min: 0, initial: 0}),
+            powerCap: new NumberField({...requiredInteger, min: 0, initial: 0}), //todo implement these values only being used if usesPower True
             powerDraw: new NumberField({...requiredInteger, min: 0, initial: 0}),
             useSkill: new StringField({
                 required: true,
-                blank:false,
+                blank: false,
                 options: [...Skills, "none"],
                 initial: "none"
-            })
+            }),
+            isSubduing: new BooleanField({required: true, initial: false})
         };
+    }
+
+    prepareDerivedData() {
+        super.prepareDerivedData();
     }
 }
 
@@ -110,6 +92,10 @@ export class ConsumableData extends EquipData {
                 max: new NumberField({...requiredInteger, min: 0, initial: 0})
             })
         }
+    }
+
+    prepareDerivedData() {
+        super.prepareDerivedData();
     }
 }
 
@@ -126,7 +112,7 @@ export class WeaponData extends EquipData {
             mDam: new BooleanField({required: true, initial: false}),
             xDam: new BooleanField({required: true, initial: false}),
             sDam: new BooleanField({required: true, initial: false}),
-            specialNotes: new StringField({required: true, blank:true}),
+            specialNotes: new StringField({required: true, blank: true}),
             //damage codes
             areaEffect: new BooleanField({required: true, initial: false}),
             burstFire: new BooleanField({required: true, initial: false}),
@@ -141,6 +127,10 @@ export class WeaponData extends EquipData {
             recoil: new NumberField({...requiredInteger, min: 0, initial: 0}),
         };
     }
+
+    prepareDerivedData() {
+        super.prepareDerivedData();
+    }
 }
 
 export class ArmorData extends EquipData {
@@ -154,16 +144,24 @@ export class ArmorData extends EquipData {
             costPatch: new NumberField({...requiredInteger, min: 0, initial: 0})
         }
     }
+
+    prepareDerivedData() {
+        super.prepareDerivedData();
+    }
 }
 
 export class CarryGearData extends EquipData {
     static defineSchema() {
         return {
             ...super.defineSchema(),
-            isCarryWeightAffecting: new BooleanField({required:true, initial: false}),
-            carryWeightAffect: new NumberField({required:true, initial: 0}),
-            equippable: new BooleanField({required:true, initial: true}),
+            isCarryWeightAffecting: new BooleanField({required: true, initial: false}),
+            carryWeightAffect: new NumberField({required: true, initial: 0}),
+            equippable: new BooleanField({required: true, initial: true}),
         }
+    }
+
+    prepareDerivedData() {
+        super.prepareDerivedData();
     }
 }
 
@@ -171,41 +169,11 @@ export class ProstheticData extends EquipData {
     static defineSchema() {
         return {
             ...super.defineSchema(),
-            //whatever prosthetics be doing
+            //todo prosthetics
         }
     }
-}
 
-/**
-*                       End Models
-**/
-
-// apply things to all items or actors
-
-export class ATOWActor extends Actor {
-    async applyDamage(damage) {
-        const { value } = this.system.resources.health;
-        const { fvalue } = this.system.resources.fatigue;
-//        if ( this.system.subduing ) {
-//            await this.update({"system.resources.fatigue": fvalue - damage})
-//        } else {
-            await this.update({"system.resources.health": value - damage});
-            await this.update({"system.resources.fatigue": fvalue - 1});
-//        }
-        await ChatMessage.implementation.create({
-            content: `${this.name} took ${damage} damage`
-        });
-    }
     prepareDerivedData() {
         super.prepareDerivedData();
-
-        const { health } = this.system.resources;
-        health.value = Math.clamp(health.value, health.min, health.max);
-        const { fatigue } = this.system.resources;
-        fatigue.value = Math.clamp(fatigue.value, fatigue.min, fatigue.max);
     }
-}
-
-export class ATOWItem extends Item {
-    //do whatever you want man fuck it
 }
