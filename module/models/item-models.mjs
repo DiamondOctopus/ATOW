@@ -123,7 +123,6 @@ export class WeaponData extends EquipData {
             burstShots: new NumberField({...requiredInteger, min: 0, initial: 0}), //wow if only js had multiple inheritance
             massReload: new NumberField({required: true, min: 0, initial: 0}),
             costReload: new NumberField({...requiredInteger, min: 0, initial: 0}),
-            isSubduing: new BooleanField({required: true, initial: false}),
             recoil: new NumberField({...requiredInteger, min: 0, initial: 0}),
         };
     }

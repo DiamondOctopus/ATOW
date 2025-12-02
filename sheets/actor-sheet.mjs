@@ -52,6 +52,7 @@ export class ATOWActorSheet extends HandlebarsApplicationMixin(ActorSheetV2) {
 
         context.system = this.actor.system;
         context.flags = this.actor.flags;
+        context.actor = this.actor;
 
         if(this.actor.type === 'character') {
             this._prepareItems(context);
@@ -99,5 +100,6 @@ export class ATOWActorSheet extends HandlebarsApplicationMixin(ActorSheetV2) {
         context.weps = weps;
         context.armors = armors;
     }
+
 
 }

@@ -25,17 +25,27 @@ export class ActorData extends foundry.abstract.TypeDataModel {
                     value: new NumberField({...requiredInteger, min: 0, initial: 10}),
                     max: new NumberField({...requiredInteger, min: 0, initial: 10})
                 }),
-                biography: new HTMLField({required: true, blank: true}),
             }),
-            attributes: new SchemaField({
-                //todo add attribute scores
-                //todo add skill levels
-            })
-        };
-    }
+            biography: new HTMLField({required: true, blank: true}),
 
-    prepareDerivedData() {
-        super.prepareDerivedData();
+            abilities: new SchemaField(Object.keys(CONFIG.ATOW.abilities).reduce((obj, ability) => {
+                obj[ability] = new SchemaField({
+                    value: new NumberField({...requiredInteger, min: 0, initial: 0}),
+                    //todo add rest
+                });
+                return obj;
+
+            }, {})),
+
+            skills: new SchemaField(Object.keys(CONFIG.ATOW.skillAbbreviations).reduce((obj, skill) => {
+                obj[skill] = new SchemaField({
+                    value: new NumberField({...requiredInteger, min: 0, initial: 0}),
+                    //todo add rest
+                });
+                return obj;
+            }, {})),
+
+        }
     }
 }
 
@@ -65,7 +75,7 @@ export class CharacterData extends ActorData {
     }
 
     prepareDerivedData() {
-        super.prepareDerivedData();
+
         //todo add attribute modifier calcs
         //todo add skill level calcs
         //todo add roll modifier calcs

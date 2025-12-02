@@ -2,13 +2,15 @@ import {
     ATOWActor, ATOWItem
 } from "./module/models/base-models.mjs";
 
-import {ATOWActorSheet} from "./sheets/actor-sheet.mjs";
-import {ATOWItemSheet} from "./sheets/item-sheet.mjs";
-import {ActorData, CharacterData} from "./module/models/actor-model.mjs";
-import {ArmorData, CarryGearData, ConsumableData, EquipData, HEModules, LifeModules, ProstheticData, WeaponData} from "./module/models/item-models.mjs";
+import { ATOWActorSheet } from "./sheets/actor-sheet.mjs";
+import { ATOWItemSheet } from "./sheets/item-sheet.mjs";
+import { ActorData, CharacterData } from "./module/models/actor-model.mjs";
+import { ArmorData, CarryGearData, ConsumableData, EquipData, HEModules, LifeModules, ProstheticData, WeaponData } from "./module/models/item-models.mjs";
+import { ATOW } from "./module/lists.mjs"
 
 Hooks.once("init", () => {
 
+    CONFIG.ATOW = ATOW;
 
     CONFIG.Actor.documentClass = ATOWActor;
     CONFIG.Item.documentClass = ATOWItem;
