@@ -20,7 +20,7 @@ export class ATOWActorSheet extends HandlebarsApplicationMixin(ActorSheetV2) {
             title: 'Character Sheet'
         },
         form: {
-            submitOnChange: true,
+            submitOnChange: true, //haha oops
         },
     }
 
