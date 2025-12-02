@@ -1,6 +1,4 @@
-import {Skills, AffCodes} from "./lists.mjs";
-
-import {toCamelCase} from "./helpers.mjs";
+import {AffCodes, Skills} from "../lists.mjs";
 
 // data model shit
 
@@ -39,26 +37,6 @@ export class ActorData extends foundry.abstract.TypeDataModel {
     }
 }
 
-
-export class CharacterData extends ActorData {
-    static defineSchema() {
-        return {
-            ...super.defineSchema(),
-            experienceTotal: new NumberField({...requiredInteger, initial: 0}),
-            experienceSpendable: new NumberField({...requiredInteger, initial: 0}),
-            background: new SchemaField({
-                height: new StringField({required: true, blank:true}),
-                weight: new StringField({required: true, blank:true}),
-                eyeColor: new StringField({required: true, blank:true}),
-                hairColor: new StringField({required: true, blank:true})
-            }),
-            money: new NumberField({required: true, blank:true})
-        };
-    }
-    prepareDerivedData() {
-        super.prepareDerivedData();
-    }
-}
 
 /**
  *

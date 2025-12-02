@@ -100,5 +100,4 @@ export class ATOWActorSheet extends HandlebarsApplicationMixin(ActorSheetV2) {
         context.armors = armors;
     }
 
-
 }
