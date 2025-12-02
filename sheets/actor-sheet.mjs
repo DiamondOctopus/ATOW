@@ -40,8 +40,11 @@ export class ATOWActorSheet extends HandlebarsApplicationMixin(ActorSheetV2) {
     }
 
     static PARTS = {
+        header: {
+            template: 'systems/atow-unofficial/templates/actor-sheet-header.hbs'
+        },
         main: {
-            template: 'systems/atow-unofficial/templates/actor-sheet.hbs'
+            template: 'systems/atow-unofficial/templates/actor-sheet-main.hbs'
         }
     }
     async _prepareContext() {
