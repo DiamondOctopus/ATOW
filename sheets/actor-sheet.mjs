@@ -19,13 +19,16 @@ export class ATOWActorSheet extends HandlebarsApplicationMixin(ActorSheetV2) {
             resizeable: true,
             title: 'Character Sheet'
         },
+        form: {
+            submitOnChange: true,
+        },
     }
 
     static TABS = {
-        initial: "main",
+        initial: "tab-main",
         tabs: [
             {
-                id: "main",
+                id: "tab-main",
                 label: "Main"
             },
             {
@@ -37,7 +40,7 @@ export class ATOWActorSheet extends HandlebarsApplicationMixin(ActorSheetV2) {
     }
 
     static PARTS = {
-        form: {
+        main: {
             template: 'systems/atow-unofficial/templates/actor-sheet.hbs'
         }
     }
