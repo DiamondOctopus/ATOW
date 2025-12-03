@@ -20,11 +20,30 @@ export class ATOWItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
             resizeable: true,
             title: 'Item Sheet'
         },
+        form: {
+            submitOnChange: true
+        }
+
+
 
     }
     static PARTS = {
         form: {
             template: 'systems/atow-unofficial/templates/item-sheet.hbs'
         }
+    }
+
+    async _prepareContext() {
+        const context = await super._prepareContext()
+
+        context.system = this.item.system;
+        context.flags = this.item.flags;
+        context.item = this.item;
+        context.config = CONFIG.ATOW;
+
+
+
+
+        return context
     }
 }

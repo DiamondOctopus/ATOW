@@ -6,7 +6,8 @@ import { ATOWActorSheet } from "./sheets/actor-sheet.mjs";
 import { ATOWItemSheet } from "./sheets/item-sheet.mjs";
 import { ActorData, CharacterData } from "./module/models/actor-model.mjs";
 import { ArmorData, CarryGearData, ConsumableData, EquipData, HEModules, LifeModules, ProstheticData, WeaponData } from "./module/models/item-models.mjs";
-import { ATOW } from "./module/lists.mjs"
+
+import {ATOW} from "./module/data/skill-data.mjs";
 
 Hooks.once("init", () => {
 
@@ -57,4 +58,5 @@ Hooks.once("init", () => {
     CONFIG.Combat.initiative = {
         formula: '2d6'
     }
+
 });

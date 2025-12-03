@@ -30,17 +30,32 @@ export class ActorData extends foundry.abstract.TypeDataModel {
 
             abilities: new SchemaField(Object.keys(CONFIG.ATOW.abilities).reduce((obj, ability) => {
                 obj[ability] = new SchemaField({
-                    value: new NumberField({...requiredInteger, min: 0, initial: 0}),
-                    //todo add rest
+                    exp: new NumberField({...requiredInteger, min: 0, initial: 0}),
+                    mod: new NumberField({...requiredInteger, min: 0, initial: 0}),
+                    score: new NumberField({...requiredInteger, min: 0, initial: 0}),
                 });
                 return obj;
+
 
             }, {})),
 
             skills: new SchemaField(Object.keys(CONFIG.ATOW.skillAbbreviations).reduce((obj, skill) => {
                 obj[skill] = new SchemaField({
-                    value: new NumberField({...requiredInteger, min: 0, initial: 0}),
-                    //todo add rest
+                    exp: new NumberField({...requiredInteger, min: 0, initial: 0}),
+                    tn: new NumberField({...requiredInteger, min: 0, initial: 0}), //todo see if can pull from CONFIG.ATOW.skillData
+                    complexity: new StringField({
+                        options: Object.keys(CONFIG.ATOW.skillComplexity),
+                        required: true,
+                        blank: false,
+                        initial: "basic"
+                    }),
+                    actions: new StringField({
+                        options: Object.keys(CONFIG.ATOW.skillActions),
+                        required: true,
+                        blank: false,
+                        initial: "basic"
+                    })
+
                 });
                 return obj;
             }, {})),

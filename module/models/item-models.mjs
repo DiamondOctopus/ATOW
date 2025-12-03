@@ -9,7 +9,7 @@ const requiredInteger = {required: true, integer:true, nullable: false};
  *                              Item Data
  *
  **/
-import {AffCodes, Skills} from "../lists.mjs";
+import { AffCodes, Skills } from "../lists.mjs";
 
 class BaseItemData extends foundry.abstract.TypeDataModel {
     static defineSchema() {
@@ -70,15 +70,14 @@ export class EquipData extends BaseItemData {
             useSkill: new StringField({
                 required: true,
                 blank: false,
-                options: [...Skills, "none"],
+                options: [Object.keys(CONFIG.ATOW.skillNames)],
                 initial: "none"
             }),
-            isSubduing: new BooleanField({required: true, initial: false})
         };
     }
 
     prepareDerivedData() {
-        super.prepareDerivedData();
+        //todo skill data?
     }
 }
 
@@ -107,9 +106,9 @@ export class WeaponData extends EquipData {
             penetration: new NumberField({...requiredInteger, min: 0, initial: 0}),
             shots: new NumberField({...requiredInteger, min: 0, initial: 0}),
             // ap codes
+            mDam: new BooleanField({required: true, initial: false}),
             bDam: new BooleanField({required: true, initial: false}),
             eDam: new BooleanField({required: true, initial: false}),
-            mDam: new BooleanField({required: true, initial: false}),
             xDam: new BooleanField({required: true, initial: false}),
             sDam: new BooleanField({required: true, initial: false}),
             specialNotes: new StringField({required: true, blank: true}),

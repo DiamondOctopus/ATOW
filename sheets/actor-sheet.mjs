@@ -53,6 +53,7 @@ export class ATOWActorSheet extends HandlebarsApplicationMixin(ActorSheetV2) {
         context.system = this.actor.system;
         context.flags = this.actor.flags;
         context.actor = this.actor;
+        context.config = CONFIG.ATOW;
 
         if(this.actor.type === 'character') {
             this._prepareItems(context);

@@ -62,7 +62,7 @@
       "NavSea":      {"long": "Navigation/Sea", "abbr": "navsea"},
       "NavSpace":    {"long": "Navigation/Space", "abbr": "navspace"},
       "Negotiate":   {"long": "Negotiation", "abbr": "nego"},
-      "Perception:": {"long": "Perception", "abbr": "per"},
+      "Perception": {"long": "Perception", "abbr": "per"},
       "PilotAero":   {"long": "Piloting/Aerospace", "abbr": "pilotaero"},
       "PilotAV":     {"long": "Piloting/Air Vehicle", "abbr": "pilotav"},
       "PilotB":      {"long": "Piloting/Battlesuit", "abbr": "pilotv"},
@@ -84,7 +84,7 @@
       "Streetwise":  {"long": "Streetwise", "abbr": "street"},
       "SupportWeps": {"long": "Support Weapons", "abbr": "sw"},
       "SurgeryG":    {"long": "Surgery/General", "abbr": "surgg"},
-      "Surgeryv":    {"long": "Surgery/Veterinary", "abbr": "surgv"},
+      "SurgeryV":    {"long": "Surgery/Veterinary", "abbr": "surgv"},
       "Survival":    {"long": "Survival", "abbr": "surv"},
       "Swimming":    {"long": "Swimming", "abbr": "swim"},
       "TacticI":     {"long": "Tactics/Infantry", "abbr": "taci"},
@@ -105,7 +105,18 @@
       "TrackUrb":    {"long": "Tracking/Urban", "abbr": "trackurb"},
       "TrackWild":   {"long": "Tracking/Wilds", "abbr": "trackwild"},
       "Training":    {"long": "Training", "abbr": "train"},
-      "ZeroG":       {"long": "Zero-G Operations", "abbr": "zerog"}
+      "ZeroG":       {"long": "Zero-G Operations", "abbr": "zerog"},
+      "none":        {"long": "none", "abbr":  "none"}
+    },
+
+    "SkillAction": {
+      "Single":  {"long": "Single", "abbr": "S"},
+      "Complex": {"long": "Complex", "abbr": "C"}
+    },
+
+    "SkillComplexity": {
+      "Basic":    {"long": "Basic", "abbr":  "B"},
+      "Advanced": {"long": "Advanced", "abbr": "A"}
     },
 
     "SheetLabels": {
