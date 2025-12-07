@@ -1,13 +1,31 @@
-<div class="{{cssClass}} {{actor.type}} flexcol" autocomplete="off">
+<section class="{{cssClass}} {{actor.type}} flexcol" autocomplete="off">
 
     {{!-- header --}}
     <header class="sheet-header">
-        <img class="profile-img" src="{{document.img}}" data-edit="img" title="{{document.name}}" height="100" width="100" />
+        <img class="profile-img" src="{{document.img}}" data-action="ieditImage" data-field="img" alt="Portrait" title="{{document.name}}" height="100" width="100" />
         <div class="header-fields">
             <h1 class="charname"><input name="name" type="text" value="{{document.name}}" placeholder="Name"></h1>
         </div>
     </header>
+    <div class="resources grid grid-3col">
+        <div class="resource flex-group-left">
+            <label for="system.resources.health.value" class="resource-label">Health</label>
+            <div class="resource-content flexrow flex-center flex-between">
+                <input type="text" name="system.resources.health.value" value="{{system.resources.health.value}}" data-dtype="Number">
+                <span> / </span>
+                <span>{{system.resources.health.max}}</span>
+            </div>
+        </div>
+        <div class="resource flex-group-center">
+            <label for="system.resources.health.value" class="resource-label">Fatigue</label>
+            <div class="resource-content flexrow flex-center flex-between">
+                <input type="text" name="system.resources.fatigue.value" value="{{system.resources.fatigue.value}}" data-dtype="Number">
+                <span> / </span>
+                <span>{{system.resources.fatigue.max}}</span>
+            </div>
+        </div>
+    </div>
 
 
-</div>
+</section>
 

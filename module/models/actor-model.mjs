@@ -28,33 +28,35 @@ export class ActorData extends foundry.abstract.TypeDataModel {
             }),
             biography: new HTMLField({required: true, blank: true}),
 
-            abilities: new SchemaField(Object.keys(CONFIG.ATOW.abilities).reduce((obj, ability) => {
-                obj[ability] = new SchemaField({
-                    exp: new NumberField({...requiredInteger, min: 0, initial: 0}),
-                    mod: new NumberField({...requiredInteger, min: 0, initial: 0}),
-                    score: new NumberField({...requiredInteger, min: 0, initial: 0}),
+            attributes: new SchemaField(Object.keys(CONFIG.ATOW.attributes).reduce((obj, attribute) => {
+                obj[attribute] = new SchemaField({
+                    xp: new NumberField({...requiredInteger, min: 0, initial: 0}),
+//                    mod: new NumberField({...requiredInteger, initial: 0}),
+//                    score: new NumberField({...requiredInteger, min: 0, initial: 0}),
                 });
                 return obj;
 
 
             }, {})),
 
-            skills: new SchemaField(Object.keys(CONFIG.ATOW.skillAbbreviations).reduce((obj, skill) => {
+            skills: new SchemaField(Object.keys(CONFIG.ATOW.skillData).reduce((obj, skill) => {
                 obj[skill] = new SchemaField({
-                    exp: new NumberField({...requiredInteger, min: 0, initial: 0}),
-                    tn: new NumberField({...requiredInteger, min: 0, initial: 0}), //todo see if can pull from CONFIG.ATOW.skillData
+                    xp: new NumberField({...requiredInteger, min: 0, initial: 0}),
+                    tn: new NumberField({...requiredInteger, min: 0, initial: 0}),
                     complexity: new StringField({
                         options: Object.keys(CONFIG.ATOW.skillComplexity),
                         required: true,
                         blank: false,
-                        initial: "basic"
+                        initial: "bas",
                     }),
                     actions: new StringField({
                         options: Object.keys(CONFIG.ATOW.skillActions),
                         required: true,
                         blank: false,
-                        initial: "basic"
-                    })
+                        initial: "single"
+                    }),
+                    level: new NumberField({...requiredInteger, min: 0, initial: 0}),
+                    linkmod: new NumberField({...requiredInteger, min: 0, initial: 0}),
 
                 });
                 return obj;
@@ -62,7 +64,14 @@ export class ActorData extends foundry.abstract.TypeDataModel {
 
         }
     }
+
+    prepareBaseData() {
+
+    }
+
+
 }
+
 
 /**
  *
@@ -85,15 +94,43 @@ export class CharacterData extends ActorData {
                 hairColor: new StringField({required: true, blank: true})
             }),
             money: new NumberField({required: true, blank: true})
-            //todo add attribute and skill exp spends
         };
     }
 
     prepareDerivedData() {
+        super.prepareDerivedData();
 
         //todo add attribute modifier calcs
         //todo add skill level calcs
         //todo add roll modifier calcs
         //todo so so so so much
+
+        //attribute  score and link modifier calculation
+        for(const key in this.attributes) {
+
+            const attribute = this.attributes[key];
+
+            attribute.score =  Math.floor(attribute.xp *.01);
+
+            if(attribute.score === 0){
+                attribute.mod = -4;
+            } else if(attribute.score === 1) {
+                attribute.mod = -2;
+            } else if(attribute.score <= 3){
+                attribute.mod = -1;
+            } else if(attribute.score <= 6) {
+                attribute.mod = 0
+            } else if(attribute.score <= 9) {
+                attribute.mod = 1;
+            } else if (attribute.score === 10){
+                attribute.mod = 2;
+            } else if (attribute.score >= 11) {
+                attribute.mod = Math.floor(attribute.score/3)
+            }
+
+            attribute.label = game.i18n.localize(CONFIG.ATOW.attributes[key]);
+
+        }
     }
+
 }

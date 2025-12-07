@@ -15,10 +15,6 @@ class BaseItemData extends foundry.abstract.TypeDataModel {
     static defineSchema() {
 
     }
-
-    prepareDerivedData() {
-        super.prepareDerivedData();
-    }
 }
 
 export class LifeModules extends BaseItemData {
@@ -29,9 +25,6 @@ export class LifeModules extends BaseItemData {
         }
     }
 
-    prepareDerivedData() {
-        super.prepareDerivedData();
-    }
 }
 
 export class HEModules extends LifeModules {
@@ -40,11 +33,6 @@ export class HEModules extends LifeModules {
             ...super.defineSchema(),
             //todo add higher education modules + rebates
         }
-    }
-
-    prepareDerivedData() {
-        super.prepareDerivedData();
-        //todo HE rebates calcs
     }
 }
 
@@ -70,15 +58,12 @@ export class EquipData extends BaseItemData {
             useSkill: new StringField({
                 required: true,
                 blank: false,
-                options: [Object.keys(CONFIG.ATOW.skillNames)],
+                options: [...Object.keys(CONFIG.ATOW.skillNames)],
                 initial: "none"
             }),
         };
     }
 
-    prepareDerivedData() {
-        //todo skill data?
-    }
 }
 
 export class ConsumableData extends EquipData {
@@ -91,10 +76,6 @@ export class ConsumableData extends EquipData {
                 max: new NumberField({...requiredInteger, min: 0, initial: 0})
             })
         }
-    }
-
-    prepareDerivedData() {
-        super.prepareDerivedData();
     }
 }
 
@@ -125,10 +106,6 @@ export class WeaponData extends EquipData {
             recoil: new NumberField({...requiredInteger, min: 0, initial: 0}),
         };
     }
-
-    prepareDerivedData() {
-        super.prepareDerivedData();
-    }
 }
 
 export class ArmorData extends EquipData {
@@ -142,10 +119,6 @@ export class ArmorData extends EquipData {
             costPatch: new NumberField({...requiredInteger, min: 0, initial: 0})
         }
     }
-
-    prepareDerivedData() {
-        super.prepareDerivedData();
-    }
 }
 
 export class CarryGearData extends EquipData {
@@ -157,10 +130,6 @@ export class CarryGearData extends EquipData {
             equippable: new BooleanField({required: true, initial: true}),
         }
     }
-
-    prepareDerivedData() {
-        super.prepareDerivedData();
-    }
 }
 
 export class ProstheticData extends EquipData {
@@ -169,9 +138,5 @@ export class ProstheticData extends EquipData {
             ...super.defineSchema(),
             //todo prosthetics
         }
-    }
-
-    prepareDerivedData() {
-        super.prepareDerivedData();
     }
 }

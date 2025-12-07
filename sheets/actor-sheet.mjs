@@ -24,36 +24,58 @@ export class ATOWActorSheet extends HandlebarsApplicationMixin(ActorSheetV2) {
         },
     }
 
-    static TABS = {
-        initial: "tab-main",
-        tabs: [
-            {
-                id: "tab-main",
-                label: "Main"
-            },
-            {
-                id: "inventory",
-                label: "Inventory"
-            }
-        ]
-
-    }
 
     static PARTS = {
         header: {
-            template: 'systems/atow-unofficial/templates/actor-sheet-header.hbs'
+            template: 'systems/atow-unofficial/templates/actor-sheet-header.hbs',
         },
+        tabs: {
+            template: 'templates/generic/tab-navigation.hbs',
+        },
+
         main: {
-            template: 'systems/atow-unofficial/templates/actor-sheet-main.hbs'
-        }
+            template: 'systems/atow-unofficial/templates/actor-sheet-main.hbs',
+        },
+        ataglance: {
+            template: 'systems/atow-unofficial/templates/tabs/tab-ataglance.hbs',
+            scrollable: [""],
+            resizeable:true,
+        },
+        inventory: {
+            template: 'systems/atow-unofficial/templates/tabs/tab-inventory.hbs',
+            scrollable: [""],
+            resizeable: true,
+        },
+
     }
-    async _prepareContext() {
-        const context = await super._prepareContext()
+
+    static TABS = {
+            tabs: [
+                {
+                    id: "ataglance",
+                    label: "At A Glance",
+                    group: "primary",
+                },
+                {
+                    id: "inventory",
+                    label: "Inventory",
+                    group: "primary",
+                }
+
+            ],
+            initial: "ataglance",
+
+    }
+
+
+    async _prepareContext(options) {
+        const context = await super._prepareContext(options)
 
         context.system = this.actor.system;
         context.flags = this.actor.flags;
         context.actor = this.actor;
         context.config = CONFIG.ATOW;
+        context.tabs = this._prepareTabs("primary");
 
         if(this.actor.type === 'character') {
             this._prepareItems(context);
@@ -72,7 +94,19 @@ export class ATOWActorSheet extends HandlebarsApplicationMixin(ActorSheetV2) {
             }
         );
 
-       return context
+       return context;
+    }
+
+    async _preparePartContext(partId, context) {
+
+        switch (partId) {
+            case 'ataglance':
+            case 'inventory':
+                context.tab = context.tabs[partId];
+                break;
+            default:return context;
+        }
+        return context;
     }
 
     _prepareCharacterData(context) {
@@ -101,6 +135,10 @@ export class ATOWActorSheet extends HandlebarsApplicationMixin(ActorSheetV2) {
         context.weps = weps;
         context.armors = armors;
     }
+
+
+
+
 
 
 }

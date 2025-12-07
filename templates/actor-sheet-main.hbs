@@ -1,28 +1,15 @@
-<section class="{{cssClass}} {{actor.type}} flexcol" autocomplete="off">
+<section class="{{cssClass}} {{actor.type}} flexcol">
+{{!--
+    {{#each system.attributes as | attribute key |}}
+        <div class="attribute flexrow flex-group-center">
+            <label for="system.attributes.{{key}}.xp" class="resource-label flexlarge align-left" data-label="{{attribute.label}}">{{attribute.label}}</label>
+            <input type="text" name="system.attributes.{{key}}.xp" value="{{attribute.xp}}" data-dtype="Number"/>
+            <span class="attribute-score">{{attribute.score}}</span>
+            <span class="attribute-mod">{{numberFormat attribute.mod decimals=0 sign=true}}</span>
+        </div>
+    {{/each}}
+    {{!-- sheet body--}}
+    <div class="sheet-body">
 
-    <div class="resources grid grid-3col">
-        <div class="resource flex-group-left">
-            <label for="system.resources.health.value" class="resource-label">Health</label>
-            <div class="resource-content flexrow flex-center flex-between">
-                <input type="text" name="system.resources.health.value" value="{{system.resources.health.value}}" data-dtype="Number">
-                <span> / </span>
-                <span>{{system.resources.health.max}}</span>
-            </div>
-        </div>
-        <div class="resource flex-group-center">
-            <label for="system.resources.health.value" class="resource-label">Fatigue</label>
-            <div class="resource-content flexrow flex-center flex-between">
-                <input type="text" name="system.resources.fatigue.value" value="{{system.resources.fatigue.value}}" data-dtype="Number">
-                <span> / </span>
-                <span>{{system.resources.fatigue.max}}</span>
-            </div>
-        </div>
     </div>
-
-
-    {{!-- sheet tabs --}}
-    <nav class="sheet-tabs tabs" data-group="primary">
-        <a class="item" data-tab="tab-main">Main</a>
-        <a class="item" data-tab="inventory">Inventory</a>
-    </nav>
 </section>
