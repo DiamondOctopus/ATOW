@@ -37,45 +37,41 @@ export class ATOWActorSheet extends HandlebarsApplicationMixin(ActorSheetV2) {
             template: 'systems/atow-unofficial/templates/actor-sheet-main.hbs',
         },
         ataglance: {
-            template: 'systems/atow-unofficial/templates/tabs/tab-ataglance.hbs',
+            template: 'systems/atow-unofficial/templates/tabs/ataglance.hbs',
             scrollable: [""],
-            resizeable:true,
         },
         inventory: {
-            template: 'systems/atow-unofficial/templates/tabs/tab-inventory.hbs',
+            template: 'systems/atow-unofficial/templates/tabs/inventory.hbs',
             scrollable: [""],
-            resizeable: true,
         },
 
     }
 
     static TABS = {
+        primary: {
             tabs: [
                 {
                     id: "ataglance",
                     label: "At A Glance",
-                    group: "primary",
                 },
                 {
                     id: "inventory",
                     label: "Inventory",
-                    group: "primary",
                 }
 
             ],
             initial: "ataglance",
-
+        }
     }
 
 
     async _prepareContext(options) {
-        const context = await super._prepareContext(options)
+        const context = await super._prepareContext(options);
 
         context.system = this.actor.system;
         context.flags = this.actor.flags;
         context.actor = this.actor;
         context.config = CONFIG.ATOW;
-        context.tabs = this._prepareTabs("primary");
 
         if(this.actor.type === 'character') {
             this._prepareItems(context);
@@ -97,17 +93,6 @@ export class ATOWActorSheet extends HandlebarsApplicationMixin(ActorSheetV2) {
        return context;
     }
 
-    async _preparePartContext(partId, context) {
-
-        switch (partId) {
-            case 'ataglance':
-            case 'inventory':
-                context.tab = context.tabs[partId];
-                break;
-            default:return context;
-        }
-        return context;
-    }
 
     _prepareCharacterData(context) {
 

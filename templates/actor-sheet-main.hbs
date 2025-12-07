@@ -1,13 +1,4 @@
 <section class="{{cssClass}} {{actor.type}} flexcol">
-{{!--
-    {{#each system.attributes as | attribute key |}}
-        <div class="attribute flexrow flex-group-center">
-            <label for="system.attributes.{{key}}.xp" class="resource-label flexlarge align-left" data-label="{{attribute.label}}">{{attribute.label}}</label>
-            <input type="text" name="system.attributes.{{key}}.xp" value="{{attribute.xp}}" data-dtype="Number"/>
-            <span class="attribute-score">{{attribute.score}}</span>
-            <span class="attribute-mod">{{numberFormat attribute.mod decimals=0 sign=true}}</span>
-        </div>
-    {{/each}}
     {{!-- sheet body--}}
     <div class="sheet-body">
 

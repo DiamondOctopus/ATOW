@@ -100,7 +100,6 @@ export class CharacterData extends ActorData {
     prepareDerivedData() {
         super.prepareDerivedData();
 
-        //todo add attribute modifier calcs
         //todo add skill level calcs
         //todo add roll modifier calcs
         //todo so so so so much
