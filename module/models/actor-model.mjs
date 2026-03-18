@@ -65,71 +65,52 @@ export class ActorData extends foundry.abstract.TypeDataModel {
         }
     }
 
-    prepareBaseData() {
-
-    }
-
-
-}
-
-
-/**
- *
- *                              Character Data
- *
- */
-
-
-
-export class CharacterData extends ActorData {
-    static defineSchema() {
-        return {
-            ...super.defineSchema(),
-            experienceTotal: new NumberField({...requiredInteger, initial: 0}),
-            experienceSpendable: new NumberField({...requiredInteger, initial: 0}),
-            background: new SchemaField({
-                height: new StringField({required: true, blank: true}),
-                weight: new StringField({required: true, blank: true}),
-                eyeColor: new StringField({required: true, blank: true}),
-                hairColor: new StringField({required: true, blank: true})
-            }),
-            money: new NumberField({required: true, blank: true})
-        };
-    }
-
     prepareDerivedData() {
         super.prepareDerivedData();
 
         //todo add skill level calcs
         //todo add roll modifier calcs
         //todo so so so so much
-
+        //remember items are in this.parent.items
         //attribute  score and link modifier calculation
-        for(const key in this.attributes) {
+        for (const key in this.attributes) {
 
             const attribute = this.attributes[key];
 
-            attribute.score =  Math.floor(attribute.xp *.01);
+            attribute.score = Math.floor(attribute.xp * .01);
 
-            if(attribute.score === 0){
+            if (attribute.score === 0) {
                 attribute.mod = -4;
-            } else if(attribute.score === 1) {
+            } else if (attribute.score === 1) {
                 attribute.mod = -2;
-            } else if(attribute.score <= 3){
+            } else if (attribute.score <= 3) {
                 attribute.mod = -1;
-            } else if(attribute.score <= 6) {
+            } else if (attribute.score <= 6) {
                 attribute.mod = 0
-            } else if(attribute.score <= 9) {
+            } else if (attribute.score <= 9) {
                 attribute.mod = 1;
-            } else if (attribute.score === 10){
+            } else if (attribute.score === 10) {
                 attribute.mod = 2;
             } else if (attribute.score >= 11) {
-                attribute.mod = Math.floor(attribute.score/3)
+                attribute.mod = Math.floor(attribute.score / 3)
             }
 
             attribute.label = game.i18n.localize(CONFIG.ATOW.attributes[key]);
 
         }
+        //skill handling for non-players
+        if (this.parent.type !== 'character') {
+            console.log('this is', this.parent.type);
+            //todo add skill handling w/no modules
+        } else {
+            console.log ('should only see this on characters - this is a', this.parent.type);
+        }
+
+
     }
 
+
+
 }
+
+

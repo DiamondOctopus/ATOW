@@ -4,10 +4,12 @@ import {
 
 import { ATOWActorSheet } from "./sheets/actor-sheet.mjs";
 import { ATOWItemSheet } from "./sheets/item-sheet.mjs";
-import { ActorData, CharacterData } from "./module/models/actor-model.mjs";
+import { ATOWCharacterSheet } from "./sheets/character-sheet.mjs";
+import { ActorData } from "./module/models/actor-model.mjs";
 import { ArmorData, CarryGearData, ConsumableData, EquipData, HEModules, LifeModules, ProstheticData, WeaponData } from "./module/models/item-models.mjs";
 
 import {ATOW} from "./module/data/skill-data.mjs";
+import {CharacterData} from "./module/models/character-model.mjs";
 
 Hooks.once("init", () => {
 
@@ -16,12 +18,25 @@ Hooks.once("init", () => {
     CONFIG.Actor.documentClass = ATOWActor;
     CONFIG.Item.documentClass = ATOWItem;
 
-    //sheets
+    //actor sheets
     foundry.documents.collections.Actors.unregisterSheet('core', foundry.applications.sheets.ActorSheetV2);
-    foundry.documents.collections.Actors.registerSheet('atow-unofficial', ATOWActorSheet,{
+    foundry.documents.collections.Actors.registerSheet('atow-unofficial', ATOWCharacterSheet,{
+        types: ["character"],
         makeDefault: true,
-        label: 'ATOW Actor Sheet',
+        label: 'ATOW Character Sheet',
     });
+    foundry.documents.collections.Actors.registerSheet('atow-unofficial', ATOWActorSheet,{
+        types: ["npc"],
+        makeDefault: true,
+        label: 'ATOW NPC Sheet',
+    });
+    foundry.documents.collections.Actors.registerSheet('atow-unofficial', ATOWActorSheet,{
+        types: ["enemy"],
+        makeDefault: true,
+        label: 'ATOW Enemy Sheet',
+    });
+
+    //item sheets todo set up all types with individual sheets
     foundry.documents.collections.Items.unregisterSheet('core', foundry.applications.sheets.ItemSheetV2);
     foundry.documents.collections.Items.registerSheet('atow-unofficial', ATOWItemSheet,{
         makeDefault: true,

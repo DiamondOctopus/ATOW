@@ -21,12 +21,24 @@ export class LifeModules extends BaseItemData {
     static defineSchema() {
         return {
             ...super.defineSchema(),
-            //todo add life modules
+            skills: new SchemaField(Object.keys(CONFIG.ATOW.skillData).reduce((obj, skill) => {
+                obj[skill] = new SchemaField({
+                    xp: new NumberField({...requiredInteger, min: 0, initial: 0}),
+                });
+                return obj;
+            }, {})),
+            attributes: new SchemaField(Object.keys(CONFIG.ATOW.attributes).reduce((obj, attribute) => {
+                obj[attribute] = new SchemaField({
+                    xp: new NumberField({...requiredInteger, min: 0, initial: 0}),
+                });
+                return obj;
+
+
+            }, {})),
         }
     }
 
 }
-
 export class HEModules extends LifeModules {
     static defineSchema() {
         return {
@@ -95,7 +107,7 @@ export class WeaponData extends EquipData {
             specialNotes: new StringField({required: true, blank: true}),
             //damage codes
             areaEffect: new BooleanField({required: true, initial: false}),
-            burstFire: new BooleanField({required: true, initial: false}),
+            burstFire: new BooleanField({required: true, initial: false}),  //todo use burstShots only when this is active
             continuous: new BooleanField({required: true, initial: false}),
             subduing: new BooleanField({required: true, initial: false}),
             splash: new BooleanField({required: true, initial: false}),

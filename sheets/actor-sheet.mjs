@@ -16,53 +16,13 @@ export class ATOWActorSheet extends HandlebarsApplicationMixin(ActorSheetV2) {
             height: 600
         },
         window: {
-            resizeable: true,
-            title: 'Character Sheet'
+            resizeable: true
         },
         form: {
             submitOnChange: true, //haha oopsie
         },
     }
 
-
-    static PARTS = {
-        header: {
-            template: 'systems/atow-unofficial/templates/actor-sheet-header.hbs',
-        },
-        tabs: {
-            template: 'templates/generic/tab-navigation.hbs',
-        },
-
-        main: {
-            template: 'systems/atow-unofficial/templates/actor-sheet-main.hbs',
-        },
-        ataglance: {
-            template: 'systems/atow-unofficial/templates/tabs/ataglance.hbs',
-            scrollable: [""],
-        },
-        inventory: {
-            template: 'systems/atow-unofficial/templates/tabs/inventory.hbs',
-            scrollable: [""],
-        },
-
-    }
-
-    static TABS = {
-        primary: {
-            tabs: [
-                {
-                    id: "ataglance",
-                    label: "At A Glance",
-                },
-                {
-                    id: "inventory",
-                    label: "Inventory",
-                }
-
-            ],
-            initial: "ataglance",
-        }
-    }
 
 
     async _prepareContext(options) {
@@ -97,12 +57,16 @@ export class ATOWActorSheet extends HandlebarsApplicationMixin(ActorSheetV2) {
     _prepareCharacterData(context) {
 
     }
-
+    //nice boxes to call things easily - remember: documents get added to the this.actor.items by dragdrop automatically
     _prepareItems(context) {
         context.items = this.actor.items;
         const gear = [];
-        const weps = [];
+        const weapons = [];
         const armors = [];
+        const consumables = []
+        const carrygear = [];
+        const lifemods = [];
+        const highered = [];
 
 
         for (let i of context.items) {
@@ -110,20 +74,34 @@ export class ATOWActorSheet extends HandlebarsApplicationMixin(ActorSheetV2) {
             if (i.type === 'equipment') {
                 gear.push(i);
             } else if (i.type === 'weapon') {
-                weps.push(i);
+                weapons.push(i);
             } else if (i.type === 'armor') {
                 armors.push(i);
+            } else if (i.type === 'consumables') {
+                consumables.push(i);
+            } else if (i.type === 'carrygear') {
+                carrygear.push(i);
+            } else if (i.type === 'lifemodules') {
+                lifemods.push(i);
+            } else if (i.type === 'highereducation') {
+                highered.push(i);
             }
         }
 
         context.gear = gear;
-        context.weps = weps;
+        context.weapons = weapons;
         context.armors = armors;
+        context.consumables = consumables;
+        context.carrygear = carrygear;
+        context.lifemodules = lifemods;
+        context.highereducation = highered;
     }
 
+    async _prepareEmbeddedDocuments() {
 
-
-
-
-
+    }
 }
+
+
+
+
